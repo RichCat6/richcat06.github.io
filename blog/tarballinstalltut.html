@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>RICHCAT06: How To Install Tarballs in Linux The Right Way</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<p><a href="/index.html">Home</a></p>
+<p><a href="blogentries.html">Blog Entry List</a></p>
+<h1>How To Install Tarballs In Linux The Right Way</h1>
+<p><i>written by RichCat06 on July 20, 2023</i></p>
+<img src="images/tarballinstalltut.png" width="50%" height="28%" alt="">
+<p>You go to a website, and you download this file (it could be .tar.gz 
+or .tar.bz2, but that's not important.) You don't know what to do with 
+it, but when you extract it, you take a look at the contents of the file
+ and think to yourself, "this looks an awful lot like the portable .zip 
+of a program." Well, you aren't too far off in making that assumption. 
+Today, I will be teaching you how to properly install this file in 
+Linux, as there are virtually no guides showing you how to do this 
+thanks to neckbeards trying to gatekeep Linux from the average Joe. 
+Without further ado, let's get started.</p>
+<p>Open your terminal, and type in this command (it will give you root access so you can actually install the program):</p>
+<code>sudo bash</code>
+<p>Then, copy the tarball to the /usr/lib folder with this command:</p>
+<code>cp /home/username/Downloads/program-1.23.en-US.linux-amd64.tar.gz /usr/lib</code>
+<p>Next, change into the /usr/lib directory:</p>
+<code>cd /usr/lib</code>
+<p>Now, with extracting the tarball, this will depend on what format it is.</p>
+<p>If it's a tar.gz file, use this command:</p>
+<code>tar -xvf program-1.23.en-US.linux-amd64.tar.gz</code>
+<p>If it's a tar.bz2, use this command:</p>
+<code>tar -xjvf program-1.23.en-US.linux-amd64.tar.bz2</code>
+<p>Next, you're gonna need root to take ownership of the folder you just extracted. To do this, type this command:</p>
+<code>chown -R root:root /usr/lib/program/</code>
+<p>Now, we're gonna need to create a file in /usr/bin/ that tells the OS
+ how to start the program. Type this command as the first part of this 
+step:</p>
+<code>nano /usr/bin/program</code>
+<p>Next, type in this text into the file:</p>
+<p><code>cd /usr/lib/program</code></p>
+<p><code>./program</code></p>
+<p>Now you can go ahead and save the file and exit the editor.</p>
+<p>Next, you're gonna need to give the file you just created permission to run as a program. To do this, type this command:</p>
+<code>chmod +x /usr/bin/program</code>
+<p>Now, you're gonna wanna create the desktop icon that'll appear in your Applications menu. To start, run this command:</p>
+<code>nano /usr/share/applications/program.desktop</code>
+<p>Then, type the text below into the file:</p>
+<p><code>[Desktop Entry]</code></p>
+<p><code>Name=Program</code></p>
+<p><code>Comment=Program Comment</code></p>
+<p><code>Exec=program</code></p>
+<p><code>Icon=/usr/lib/program/icons/program.xpm</code></p>
+<p><code>Terminal=false</code></p>
+<p><code>Type=Application</code></p>
+<p><code>Categories=Application;Other;</code></p>
+<p>Now, save the file, and close the editor.</p>
+<p>All you have to do now is close the terminal and restart, or, if you don't wanna reboot your system, log out and log back in.</p>
+
+</body></html>
